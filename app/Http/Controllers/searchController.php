@@ -39,7 +39,7 @@ class searchController extends Controller
                     '<td>'.$question->marks.'</td>'.
                     '<td>'.$question->options.'</td>'.
                     '<td>
-                    <a id="edit" type="submit"  data-id="'.$question->id.'" class="btn btn-primary edit" >Edit</a>
+                    <a href="showmcqdata/'.$question->id.'" id="edit" type="submit"  data-id="'.$question->id.'" class="btn btn-primary edit" >Edit</a>
                     
                    
                        <a style="margin-left: 13%;" type="submit" data-id="'.$question->id.'" id="del" class="btn btn-danger delete-btn" >Delete</a>

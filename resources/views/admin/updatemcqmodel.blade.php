@@ -100,10 +100,29 @@
 
 @csrf
 <!-- Text input-->
-<p>Ans{{ $id }}</p>
+
 <div class="form-group">
   <label class="col-md-12 control-label" for="name">Quize Name</label>  
   <div class="col-md-12">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Answers</th>
+        <th>option</th>
+      
+      </tr>
+    </thead>
+    <tbody>
+     
+     @foreach($qsns as $qsn)
+     <tr>
+     <td><input type="text" id="fname" name="fname" value="{{$qsn->option_value}}"/></td>
+     <td>  <input type="radio" id="opt" name="opt" ></td>
+     </tr>
+     @endforeach
+     
+    </tbody>
+  </table>
   <select class="form-control papercatdropdown" name="quizid" >
   <option value=""></option>
   

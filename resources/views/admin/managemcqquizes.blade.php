@@ -223,7 +223,8 @@
         });
 
         //update mcq
-
+        
+/*
         $('body').delegate('#managemcq #edit','click',function(e){
 
           
@@ -238,20 +239,20 @@
 
 
 
-     $.ajax({
-                url: '{{ route("editmcqmodel") }}',
-                type: 'GET',
-                data: { id: id },
+    //  $.ajax({
+    //             url: '{{ route("editmcqmodel") }}',
+    //             type: 'GET',
+    //             data: { id: id },
                 
-                success: function(response)
-                {
+    //             success: function(response)
+    //             {
                    //alert(data);
                    // var url = '{{ route("editmcqmodel") }}';
                   //url = url.replace(':id', id);
           
                   //window.location.assign(url);
                 }
-            });
+            // });
 
 
 /*

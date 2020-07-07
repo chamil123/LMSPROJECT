@@ -142,4 +142,18 @@ class managemcqController extends Controller
             }
         }
     }
+    public function test($id){
+        //$data=new M
+        // $qsns = mcqquiz::where('id',$id)->get();
+
+
+        $qsns = DB::table('mcqquizes')
+                    ->select('*')
+                    ->join('mcqoptions', 'mcqquizes.id', '=', 'mcqoptions.question_id')
+                    ->where('mcqquizes.id', $id)
+                    ->get();
+
+        
+        return view('admin.updatemcqmodel',compact("qsns"));
+    }
 }

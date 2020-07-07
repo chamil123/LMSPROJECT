@@ -44,7 +44,9 @@ Route::get('admin/home/mcqquizes','mcqquizeController@index');
 
 
 Route::post('admin/home/managemcq', 'managemcqController@destroy');
-Route::get('admin/home/editmcqmodel', 'managemcqController@update')->name('editmcqmodel');
+ Route::get('admin/home/editmcqmodel', 'managemcqController@update')->name('editmcqmodel');
+ Route::get('admin/home/showmcqdata/{id}', 'managemcqController@test');
+// Route::get('admin/home/editmcqmode/{id}', 'managemcqController@update')->name('editmcqmodel');
 
 
 
