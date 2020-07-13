@@ -103,14 +103,30 @@
             
 <div class="details">
  
-<div class="form-group">
 
-<select class="form-control" id="search" name="correctop" class="form-control">
-   <option value="">Select correct option</option>
-          @foreach($quizes as $quiz)
-        <option value="{{ $quiz->id }}">{{ $quiz->quizname }}</option>
-          @endforeach
- </select>
+
+<div class="form-group">
+  <label class="control-label col-sm-4">Search with paper and question type</label>
+    <div class="col-sm-12">
+      <div class="row">
+        <div class="col-sm-5">
+        <select class="form-control" id="paper-drop" name="correctop" class="form-control">
+             <option value="">Select correct option</option>
+                @foreach($quizes as $quiz)
+                  <option value="{{ $quiz->id }}">{{ $quiz->quizname }}</option>
+                 @endforeach
+        </select>
+        </div>
+      <div class="col-sm-5">
+      <select class="form-control" id="pape-category" name="correctop" class="form-control">
+             <option value="">Select correct type</option>
+             <option value="Paragraph">Paragraph</option>
+             <option value="Single">Single</option>
+        </select>
+        
+      </div>   
+    </div>
+  </div>
 </div>
 
 
