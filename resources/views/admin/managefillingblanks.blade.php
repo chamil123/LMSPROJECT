@@ -36,7 +36,7 @@
                                     <li><a href="{{ url('admin/home/courses') }}">Register Courses</a></li>
                                     <li><a href="{{ url('admin/home/paper-categories') }}">All Paper categories</a></li>
                                 </ul>
-                            </li>  
+                            </li>
                             <li>
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Quiz
                                     </span></a>
@@ -87,106 +87,64 @@
             </div>
             <!-- header area start -->
             <div class="row" id="top-of-site">
-            <div class="col-md-9"><p style="color:white;text-align:center;letter-spacing: 2.5px;">Enter Filling Blanks Quiz Details</p></div>
+            <div class="col-md-9"><p style="color:white;text-align:center;letter-spacing: 2.5px;">All Paper Questions for Blanks model</p></div>
             <div class="col-md-3">
            
             </div>
             </div>
-</br></br>
-            <div class="row">
+            
+        
 
- <div class="col-md-3"></div><div class="col-md-6">   <form class="form-horizontal title1" name="form" action="{{ route('fillingblanks.store') }}"  method="POST">
+        
+              
 
 
-@csrf
 
-<!-- Text input-->
+            
+<div class="details">
+ 
 <div class="form-group">
-  <label class="col-md-12 control-label" for="name">Quize Name</label>  
-  <div class="col-md-12">
-  <select class="form-control papercatdropdown" name="quizid" >
-  <option value=""></option>
-  
-  @foreach($quizes as $quize)
 
-<option value="{{ $quize->id }}">{{ $quize->quizname}}</option>
-
-@endforeach
-</select>
-    
-  
-</select>
-    
-  </div>
+<select class="form-control" id="search" name="correctop" class="form-control">
+   <option value="">Select correct option</option>
+          @foreach($quizes as $quiz)
+        <option value="{{ $quiz->id }}">{{ $quiz->quizname }}</option>
+          @endforeach
+ </select>
 </div>
 
-<div class="form-group">
-  <label class="control-label col-sm-4">Question Type</label>
-    <div class="col-sm-6">
-      <div class="row">
-        <div class="col-sm-5">
-          <label class="radio-inline">
-            <input type="radio" id="Paragraph" value="Paragraph" name="questiontype" required><b>Paragraph</b>
-          </label>
-        </div>
-      <div class="col-sm-5">
-        <label class="radio-inline">
-          <input type="radio" id="Single" value="Single" name="questiontype"required><b>Single<b>
-        </label>
+
+    <table id="managemcq" class="table table-bordered">
+        <thead class="table-head">
+        <tr>
+            <th style="display:none">id</th>
+            <th>Question</th>
+            <th>Marks Allocate</th>
+            <th width="106px">options</th>
+            <th width="202px">Action</th>
+    
+        </tr>
+      </thead>
+        <tbody id="ajax-body">
+ 
+       
+       
         
-      </div>   
+     </tbody>
+    </table>
+
+            </div>
+
+            
+            </div>
+
+        
+
+
+      
     </div>
   </div>
 </div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-12 control-label" for="qsn">Question</label>  
-  <div class="col-md-12">
-  <textarea id="qsn" name="Question" placeholder="Question" class="form-control input-md"></textarea>
-    
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-12 control-label" for="right"></label>  
-  <div class="col-md-12">
-  <input id="right" name="marks" placeholder="Marks on right answer" class="form-control input-md" min="0" type="number">
-    
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-12 control-label" for="wrong"></label>  
-  <div class="col-md-12">
-  <input id="options" name="blankoptions" placeholder="No of Blanks" class="form-control input-md" min="0" type="number">
-    
-  </div>
-</div>
-
-<!-- Text input-->
-
-
-<!-- Text input-->
-
-
-
-<!-- Text input-->
-
-
-
-<div class="form-group">
-  <label class="col-md-12 control-label" for=""></label>
-  <div class="col-md-12"> 
-    <input  type="submit" style="margin-left:45%" class="btn btn-primary" value="Submit" class="btn btn-primary"/>
-  </div>
-</div>
-
-</fieldset>
-</form></div>
-            
             
         </div>
         <!-- main content area end -->
@@ -206,20 +164,9 @@
    
     @section('js')
     <script src="{{ asset('vendor\unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
-    <script src="{{ asset('vendor\unisharp/laravel-ckeditor/adapters/jquery.js') }}"></script>
     <script>
-        CKEDITOR.replace('qsn');
-        CKEDITOR.config.autoParagraph = false;
-        
-    </script>
-    <script type="text/javascript">
-    $(function() {
-    $('#qsn').ckeditor({
-        toolbar: 'Full',
-        enterMode : CKEDITOR.ENTER_BR,
-        shiftEnterMode: CKEDITOR.ENTER_P
-    });
-});
+        //CKEDITOR.replace('TextareaforLongdescription');
+        //CKEDITOR.replace('Longdescription');
     </script>
     <!-- offset area end -->
     <!-- jquery latest version -->
@@ -257,6 +204,79 @@
     <!-- others plugins -->
     <script src="{{ asset('assets/js/plugins.js') }}"></script>
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
+    <script src="{{ asset('assets/js/index.js') }}"></script>
+    <script>
+
+     $(document).ready(function(){
+
+        $('body').delegate('#managemcq #del','click',function(e){
+            $.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
+
+     var id=$(this).data('id');
+      $.post('{{ URL::to("admin/home/managemcq")}}',{id:id},function(data){
+       console.log(data);
+
+          });
+
+        });
+
+        //update mcq
+        
+/*
+        $('body').delegate('#managemcq #edit','click',function(e){
+
+          
+
+            $.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
+
+     var id=$(this).data('id');
+
+
+
+    //  $.ajax({
+    //             url: '{{ route("editmcqmodel") }}',
+    //             type: 'GET',
+    //             data: { id: id },
+                
+    //             success: function(response)
+    //             {
+                   //alert(data);
+                   // var url = '{{ route("editmcqmodel") }}';
+                  //url = url.replace(':id', id);
+          
+                  //window.location.assign(url);
+                }
+            // });
+
+
+/*
+     
+      $.get('{{ URL::to("admin/home/editmcqmodel")}}',{id:id},function(data){
+        var url = '{{ route("editmcqmodel", [":id"] ) }}';
+            url = url.replace(':id', id);
+          
+            window.location.assign(url);
+            console.log("succes");
+
+          }); 
+
+     */
+
+        });
+
+
+        
+    });
+    </script>
+   
 </body>
 
 </html>
