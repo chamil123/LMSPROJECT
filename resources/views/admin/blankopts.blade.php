@@ -41,7 +41,7 @@
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Quiz
                                     </span></a>
                                 <ul class="collapse">
-                                    <li><a href="{{ url('admin/home/mcqquizes') }}">Add Mcq Quize</a></li>
+                                <li><a href="{{ url('admin/home/mcqquizes') }}">Add Mcq Quize</a></li>
                                     <li><a href="index3-horizontalmenu.html">Manage mcq quize</a></li>
                                     <li><a href="">Add Filling Blanks Quize</a></li>
                                 </ul>
@@ -86,83 +86,46 @@
             </div>
             <!-- header area start -->
             <div class="row" id="top-of-site">
-            <div class="col-md-9"><p style="color:white;text-align:center;letter-spacing: 2.5px;">Enter Quiz Details</p></div>
+            <div class="col-md-9"><p style="color:white;text-align:center;letter-spacing: 2.5px;">Enter Options</p></div>
             <div class="col-md-3">
            
             </div>
             </div>
 </br></br>
-            <div class="row">
 
- <div class="col-md-3"></div><div class="col-md-6">   <form class="form-horizontal title1" name="form" action="{{ route('mcqquizes.store') }}"  method="POST">
-<fieldset>
+ <div class="row">
 
+ <div class="col-md-3"></div>
+ <div class="col-md-6">  
+  <form method="post" action="{{ route('blankoptions.store') }}">
 @csrf
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-12 control-label" for="name">Quize Name</label>  
-  <div class="col-md-12">
-  <select class="form-control papercatdropdown" name="quizid" >
-  <option value=""></option>
-  @foreach($quizes as $quize)
+@php
+$z=1;
+$y=1;
+@endphp
 
-<option value="{{ $quize->id }}">{{ $quize->quizname}}</option>
+<input type="hidden" class="form-control" name="questionid" value="{{$last}}">
+@foreach($orders as $order)
+<div class="">
+      <input type="hidden" class="form-control" name="id[]" value="{{$order->Blankid}}">
 
+    <div class="form-group">
+      <label for="opt[]" class=" text-md-right">Blank{{$z}}</label>
+        <input type="text" name="opt[]" class="form-control" id="exampleFormControlInput1" placeholder="Enter Answer for Blank{{$z}}" value="">
+    </div>
+</div>
+     @php
+$z++;
+@endphp
 @endforeach
-</select>
-    
-  </div>
+
+
+
+
+ <button type="submit" class="btn btn-primary">Add the question</button>
+
+  </form>
 </div>
-
-
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-12 control-label" for="total"></label>  
-  <div class="col-md-12">
-  <input id="total" name="Question" placeholder="Question" class="form-control input-md" type="text">
-    
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-12 control-label" for="right"></label>  
-  <div class="col-md-12">
-  <input id="right" name="marks" placeholder="Marks on right answer" class="form-control input-md" min="0" type="number">
-    
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-12 control-label" for="wrong"></label>  
-  <div class="col-md-12">
-  <input id="options" name="options" placeholder="No of Options" class="form-control input-md" min="0" type="number">
-    
-  </div>
-</div>
-
-<!-- Text input-->
-
-
-<!-- Text input-->
-
-
-
-<!-- Text input-->
-
-
-
-<div class="form-group">
-  <label class="col-md-12 control-label" for=""></label>
-  <div class="col-md-12"> 
-    <input  type="submit" style="margin-left:45%" class="btn btn-primary" value="Submit" class="btn btn-primary"/>
-  </div>
-</div>
-
-</fieldset>
-</form></div>
             
             
         </div>

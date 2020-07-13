@@ -86,6 +86,7 @@
         $("#reg-form").css("display", "none");
         $("#edit-model").css("display", "none");
         $("#edit-model2").css("display", "none");
+        $("#delete-opt").css("display", "none")
         //(... rest of your JS code)
     });
 
@@ -93,7 +94,9 @@
         $("#reg-form").css("display", "block")
     });
 
-   
+    $( "#delete-opt-btn" ).click(function() {
+        $("#delete-opt").css("display", "block");
+    });
 
   //  $('table').load(location.href + " table", function(){
         

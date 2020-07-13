@@ -17,6 +17,14 @@ class managemcqController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function remove(Request $request)
+    {
+        //
+       
+    }
+
+
     public function index()
     {
         //
@@ -42,6 +50,32 @@ class managemcqController extends Controller
      */
     public function store(Request $request)
     {
+        $ids = $request->input('id');
+        $opts = $request->input('opt');
+        $qid = $request->input('questionid');
+        $coptid=$request->input('correctoptionid');
+        
+        //print_r($request->all());
+        
+        
+        foreach($ids as $k => $id){
+        
+          $values = array(
+                            'option_value' => $opts[$k],
+                            
+                        );
+        
+          DB::table('mcqoptions')->where('id','=',$id)->update($values);
+        
+        }
+        
+        $valuesq = array(
+            'correctoptionid' => $coptid,
+            
+        );
+        
+        DB::table('mcqquizes')->where('id','=',$qid)->update($valuesq);
+        return redirect('admin/home/managemcq');
         //
     }
 
@@ -96,6 +130,13 @@ class managemcqController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+
+     
+         
+     
+
+
     public function destroy(Request $request)
     {
         //
@@ -146,14 +187,52 @@ class managemcqController extends Controller
         //$data=new M
         // $qsns = mcqquiz::where('id',$id)->get();
 
-
+        $qid=$id;
         $qsns = DB::table('mcqquizes')
                     ->select('*')
                     ->join('mcqoptions', 'mcqquizes.id', '=', 'mcqoptions.question_id')
                     ->where('mcqquizes.id', $id)
+                    ->orderBy('mcqoptions.id', 'ASC')
                     ->get();
 
         
-        return view('admin.updatemcqmodel',compact("qsns"));
+        return view('admin.updatemcqmodel',compact("qsns",'qid'));
+    }
+
+
+    public function addopt($id){
+
+        $nooption =  mcqquiz::find($id);
+        $updatedopts= $nooption->options;
+        $updatedopts++;
+        $valuesq = array(
+            'options' => $updatedopts,
+            
+        );
+        
+        DB::table('mcqquizes')->where('id','=',$id)->update($valuesq);
+        $form_data=array(
+            'question_id' => $id,
+            'option_value' => '',
+        );
+  
+       // CourseMode::create($form_data);
+      
+        mcqoption::create($form_data);
+      
+        return  redirect("/admin/home/showmcqdata/$id");
+
+      /*
+        $form_data=array(
+            'question_id' => $id,
+            'option_value' => '',
+        );
+  
+       // CourseMode::create($form_data);
+       $options =  mcqoption::create($form_data);
+      
+
+        return redirect('admin/home/managemcq');
+        */
     }
 }

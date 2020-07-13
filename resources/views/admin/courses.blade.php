@@ -157,7 +157,7 @@
             <td class="align-middle courseCode">{{ $course->coursecode }}</td>
             <td class="align-middle courseName">{{ $course->coursename }}</td>
             <td class="align-middle shortDescription">{{ $course->shortdescription }}</td>
-            <td class="align-middle longdescription">{{ $course->longdescription }}</td>
+            <td class="align-middle longdescription">{!! $course->longdescription !!}</td>
             <td class="align-middle" >
                 
    

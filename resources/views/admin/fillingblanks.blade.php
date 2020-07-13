@@ -36,7 +36,7 @@
                                     <li><a href="{{ url('admin/home/courses') }}">Register Courses</a></li>
                                     <li><a href="{{ url('admin/home/paper-categories') }}">All Paper categories</a></li>
                                 </ul>
-                            </li>
+                            </li>  
                             <li>
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Quiz
                                     </span></a>
@@ -44,6 +44,7 @@
                                     <li><a href="{{ url('admin/home/mcqquizes') }}">Add Mcq Quize</a></li>
                                     <li><a href="index3-horizontalmenu.html">Manage mcq quize</a></li>
                                     <li><a href="">Add Filling Blanks Quize</a></li>
+                                    <li><a href="{{ url('admin/home/managemcq') }}">Manage Filling Blanks Quizes</a></li>
                                 </ul>
                             </li>
                             <li><a href="invoice.html"><i class="ti-receipt"></i> <span>Instructors</span></a></li>
@@ -86,7 +87,7 @@
             </div>
             <!-- header area start -->
             <div class="row" id="top-of-site">
-            <div class="col-md-9"><p style="color:white;text-align:center;letter-spacing: 2.5px;">Enter Quiz Details</p></div>
+            <div class="col-md-9"><p style="color:white;text-align:center;letter-spacing: 2.5px;">Enter Filling Blanks Quiz Details</p></div>
             <div class="col-md-3">
            
             </div>
@@ -94,16 +95,18 @@
 </br></br>
             <div class="row">
 
- <div class="col-md-3"></div><div class="col-md-6">   <form class="form-horizontal title1" name="form" action="{{ route('mcqquizes.store') }}"  method="POST">
-<fieldset>
+ <div class="col-md-3"></div><div class="col-md-6">   <form class="form-horizontal title1" name="form" action="{{ route('fillingblanks.store') }}"  method="POST">
+
 
 @csrf
+
 <!-- Text input-->
 <div class="form-group">
   <label class="col-md-12 control-label" for="name">Quize Name</label>  
   <div class="col-md-12">
   <select class="form-control papercatdropdown" name="quizid" >
   <option value=""></option>
+  
   @foreach($quizes as $quize)
 
 <option value="{{ $quize->id }}">{{ $quize->quizname}}</option>
@@ -111,16 +114,36 @@
 @endforeach
 </select>
     
+  
+</select>
+    
   </div>
 </div>
 
-
+<div class="form-group">
+  <label class="control-label col-sm-4">Question Type</label>
+    <div class="col-sm-6">
+      <div class="row">
+        <div class="col-sm-5">
+          <label class="radio-inline">
+            <input type="radio" id="Paragraph" value="Paragraph" name="questiontype" required><b>Paragraph</b>
+          </label>
+        </div>
+      <div class="col-sm-5">
+        <label class="radio-inline">
+          <input type="radio" id="Single" value="Single" name="questiontype"required><b>Single<b>
+        </label>
+        
+      </div>   
+    </div>
+  </div>
+</div>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-12 control-label" for="total"></label>  
+  <label class="col-md-12 control-label" for="qsn">Question</label>  
   <div class="col-md-12">
-  <input id="total" name="Question" placeholder="Question" class="form-control input-md" type="text">
+  <textarea id="qsn" name="Question" placeholder="Question" class="form-control input-md"></textarea>
     
   </div>
 </div>
@@ -138,7 +161,7 @@
 <div class="form-group">
   <label class="col-md-12 control-label" for="wrong"></label>  
   <div class="col-md-12">
-  <input id="options" name="options" placeholder="No of Options" class="form-control input-md" min="0" type="number">
+  <input id="options" name="blankoptions" placeholder="No of Blanks" class="form-control input-md" min="0" type="number">
     
   </div>
 </div>
@@ -183,9 +206,20 @@
    
     @section('js')
     <script src="{{ asset('vendor\unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('vendor\unisharp/laravel-ckeditor/adapters/jquery.js') }}"></script>
     <script>
-        //CKEDITOR.replace('TextareaforLongdescription');
-        //CKEDITOR.replace('Longdescription');
+        CKEDITOR.replace('qsn');
+        CKEDITOR.config.autoParagraph = false;
+        
+    </script>
+    <script type="text/javascript">
+    $(function() {
+    $('#qsn').ckeditor({
+        toolbar: 'Full',
+        enterMode : CKEDITOR.ENTER_BR,
+        shiftEnterMode: CKEDITOR.ENTER_P
+    });
+});
     </script>
     <!-- offset area end -->
     <!-- jquery latest version -->

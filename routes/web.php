@@ -29,6 +29,10 @@ Route::get('searchbox','searchController@search')->name('searchfilter');
 //Route::get('search','searchController@search');
 
 Route::resource('mcqoptions','mcqoptionsController');
+Route::resource('search','searchController');
+
+
+Route::resource('blankoptions','BlankOptionsController');
 
 Route::resource('coursetests','CoursetestController');
 Route::get('admin/home/coursetests','CoursetestController@index');
@@ -42,10 +46,14 @@ Route::get('admin/home/exams','examController@index');
 Route::resource('mcqquizes','mcqquizeController');
 Route::get('admin/home/mcqquizes','mcqquizeController@index');
 
+Route::resource('fillingblanks','FillingBlanksController');
+Route::get('admin/home/fillingblanks','FillingBlanksController@index');
 
 Route::post('admin/home/managemcq', 'managemcqController@destroy');
+Route::post('admin/home/mcqmanage','managemcqController@remove')->name('mcqmanage');
  Route::get('admin/home/editmcqmodel', 'managemcqController@update')->name('editmcqmodel');
  Route::get('admin/home/showmcqdata/{id}', 'managemcqController@test');
+ Route::get('admin/home/showmcqdata/addopt/{id}', 'managemcqController@addopt');
 // Route::get('admin/home/editmcqmode/{id}', 'managemcqController@update')->name('editmcqmodel');
 
 

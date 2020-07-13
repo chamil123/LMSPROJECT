@@ -42,6 +42,7 @@
                                     </span></a>
                                 <ul class="collapse">
                                     <li><a href="{{ url('admin/home/mcqquizes') }}">Add Mcq Quize</a></li>
+                                    <li><a href="{{ url('admin/home/mcqquizes') }}">Add Filling Blanks Quize</a></li>
                                     <li><a href="index3-horizontalmenu.html">Manage mcq quize</a></li>
                                 </ul>
                             </li>
@@ -83,11 +84,47 @@
                     </div>
                 </div>
             </div>
+
+            <div id="delete-opt" class="course-registration-form">
+            
+            <h4 style="padding-left: 8%; padding-top:2%;font-family:Arial;font-weight:600 !important;">Delete a option</h4>
+            <a class="close" href="#">&times;</a>
+            </br>
+            @php
+            $z=1;
+            @endphp
+            
+            
+              <form class="add-form" method="post" action="{{ route('mcqquizes.update',$qid) }}" enctype='multipart/form-data' >
+              @csrf
+              @method('PUT')
+              <div class="form-group">
+                    <label>Correct Option</label>
+                           <select class="form-control coursedropdown" name="correctoptionid" class="form-control">
+                           <option value="">Select correct option</option>
+                                   @foreach($qsns as $qsn)
+                                       <option value="{{ $qsn->id }}">option{{$z}}</option>
+                                       @php
+                                       $z++;
+                                       @endphp
+                                     @endforeach
+                    </select>
+           </div>
+  <button type="submit" class="btn btn-primary mb-2">Delete this option</button>
+ 
+               </form>
+
+
+
+            </div>
             <!-- header area start -->
             <div class="row" id="top-of-site">
-            <div class="col-md-9"><p style="color:white;text-align:center;letter-spacing: 2.5px;">Update Quiz Details</p></div>
-            <div class="col-md-3">
-           
+            <div class="col-md-8"><p style="color:white;text-align:center;letter-spacing: 2.5px;">Update Quiz Details</p></div>
+            <div class="col-md-2">
+            <a  href="addopt/{{ $qid }}" id="addnewbtn" style="color:white" class="btn btn-primary"><span style="font-size: 17px;">+</span>Add New option</a>
+            </div>
+            <div class="col-md-2">
+            <a  id="delete-opt-btn"  style="color:white"  class="btn btn-primary"><span style="font-size: 17px;">+</span>Delete Option</a>
             </div>
             </div>
 </br></br>
@@ -95,91 +132,55 @@
 
            
 
- <div class="col-md-3"></div><div class="col-md-6">   <form class="form-horizontal title1" name="form" action="{{ route('mcqquizes.store') }}"  method="POST">
-<fieldset>
+ <div class="col-md-3"></div><div class="col-md-6"> 
+ @php
+ $message = Session::get('message');
+ if($message){
+     echo  $message;
+ }
+@endphp
 
+
+
+ <form method="post" action="{{ route('managemcq.store') }}">
 @csrf
-<!-- Text input-->
+@php
+$z=1;
+$y=1;
+@endphp
 
-<div class="form-group">
-  <label class="col-md-12 control-label" for="name">Quize Name</label>  
-  <div class="col-md-12">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Answers</th>
-        <th>option</th>
-      
-      </tr>
-    </thead>
-    <tbody>
-     
-     @foreach($qsns as $qsn)
-     <tr>
-     <td><input type="text" id="fname" name="fname" value="{{$qsn->option_value}}"/></td>
-     <td>  <input type="radio" id="opt" name="opt" ></td>
-     </tr>
-     @endforeach
-     
-    </tbody>
-  </table>
-  <select class="form-control papercatdropdown" name="quizid" >
-  <option value=""></option>
-  
-</select>
-    
-  </div>
+<input type="hidden" class="form-control" name="questionid" value="{{ $qid }}">
+@foreach($qsns as $qsn)
+<div class="">
+      <input type="hidden" class="form-control" name="id[]" value="{{ $qsn->id }}">
+
+    <div class="form-group">
+        <input type="text" name="opt[]" class="form-control" id="exampleFormControlInput1" placeholder="option{{$z}}" value="{{ $qsn->option_value }}">
+    </div>
 </div>
-
-
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-12 control-label" for="total"></label>  
-  <div class="col-md-12">
-  <input id="total" name="Question" placeholder="Question" class="form-control input-md" type="text">
-    
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-12 control-label" for="right"></label>  
-  <div class="col-md-12">
-  <input id="right" name="marks" placeholder="Marks on right answer" class="form-control input-md" min="0" type="number">
-    
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-12 control-label" for="wrong"></label>  
-  <div class="col-md-12">
-  <input id="options" name="options" placeholder="No of Options" class="form-control input-md" min="0" type="number">
-    
-  </div>
-</div>
-
-<!-- Text input-->
-
-
-<!-- Text input-->
-
-
-
-<!-- Text input-->
-
+     @php
+$z++;
+@endphp
+@endforeach
 
 
 <div class="form-group">
-  <label class="col-md-12 control-label" for=""></label>
-  <div class="col-md-12"> 
-    <input  type="submit" style="margin-left:45%" class="btn btn-primary" value="Submit" class="btn btn-primary"/>
-  </div>
+<label>Correct Option</label>
+                           <select class="form-control coursedropdown" name="correctoptionid" class="form-control">
+                           <option value="">Select correct option</option>
+                                   @foreach($qsns as $qsn)
+                                       <option value="{{ $qsn->id }}">option{{$y}}</option>
+                                       @php
+                                       $y++;
+                                       @endphp
+                                     @endforeach
+                    </select>
 </div>
 
-</fieldset>
-</form></div>
+ <button type="submit" class="btn btn-primary">Update the question</button>
+
+  </form>
+  </div>
             
             
         </div>

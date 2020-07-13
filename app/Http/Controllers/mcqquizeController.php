@@ -116,6 +116,17 @@ class mcqquizeController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $opt=$request->correctoptionid;
+        $count = mcqquiz::where('id', $id)->where('correctoptionid', $opt)->get()->count();
+        if($count == 0){
+            $message="";
+        }
+        else{
+            $message="Add a new option for this question";
+        }
+        DB::table('mcqoptions')->where('id', $opt)->delete();
+        return redirect("/admin/home/showmcqdata/$id")->with( ['message' => $message] );;
+
     }
 
     /**
