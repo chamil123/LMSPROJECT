@@ -44,7 +44,7 @@ Route::get('admin/home/managemcq','managemcqController@index');
 Route::resource('exams','examController');
 Route::get('admin/home/exams','examController@index');
 
-Route::post('admin/home/managefillingblanks','managefillingblanksController@destroy');
+Route::post('admin/home/managefilling','managefillingblanksController@destroy');
 Route::resource('managefillingblanks','managefillingblanksController');
 Route::get('admin/home/managefillingblanks','managefillingblanksController@index');
 

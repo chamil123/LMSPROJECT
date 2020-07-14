@@ -36,7 +36,7 @@ class managefillingblanksController extends Controller
             if($questions)
             {
                 foreach($questions as $question){
-                    $output .='<tr>'.
+                    $output .='<tr id="'.$question->Qid.'">'.
                     '<td style="display:none">'.$question->Qid.'</td>'.
                     '<td>'.$question->Question.'</td>'.
                     '<td>'.$question->marks.'</td>'.
@@ -128,11 +128,12 @@ class managefillingblanksController extends Controller
         if($request->ajax()){
         $qsns = blankoptions::where('question_id', $request->id)->get();
         foreach ($qsns as $qsn){
-            DB::table('blankoptions')->where('id', $qsn->id)->delete();
+            DB::table('blankoptions')->where('Blankid', $qsn->Blankid)->delete();
         }
         
         
-        fillingblank::destroy($request->id);
+        //fillingblank::destroy($request->id);
+        DB::table('fillingblanks')->where('Qid', $request->id)->delete();
         return response(['message'=>'Record deleted Succesfully']);
         }
 

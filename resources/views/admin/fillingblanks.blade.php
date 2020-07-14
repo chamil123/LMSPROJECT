@@ -123,15 +123,15 @@
 <div class="form-group">
   <label class="control-label col-sm-4">Question Type</label>
     <div class="col-sm-6">
-      <div class="row">
+      <div class="row" id="radioButtonContainerId">
         <div class="col-sm-5">
           <label class="radio-inline">
-            <input type="radio" id="Paragraph" value="Paragraph" name="questiontype" required><b>Paragraph</b>
+            <input type="radio"  id="Paragraph" value="Paragraph" name="questiontype" required><b>Paragraph</b>
           </label>
         </div>
       <div class="col-sm-5">
         <label class="radio-inline">
-          <input type="radio" id="Single" value="Single" name="questiontype"required><b>Single<b>
+          <input type="radio" onclick="blanks()" id="Single" value="Single" name="questiontype"required><b>Single<b>
         </label>
         
       </div>   
@@ -143,7 +143,7 @@
 <div class="form-group">
   <label class="col-md-12 control-label" for="qsn">Question</label>  
   <div class="col-md-12">
-  <textarea id="qsn" name="Question" placeholder="Question" class="form-control input-md"></textarea>
+  <textarea id="question" name="Question" placeholder="Question" class="form-control input-md"></textarea>
     
   </div>
 </div>
@@ -205,25 +205,47 @@
     <!-- offset area start -->
    
     @section('js')
+    <script src="{{ asset('assets/js/vendor/jquery-2.2.4.min.js') }}"></script>
     <script src="{{ asset('vendor\unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
     <script src="{{ asset('vendor\unisharp/laravel-ckeditor/adapters/jquery.js') }}"></script>
     <script>
-        CKEDITOR.replace('qsn');
+    
+    </script>
+    
+    <script>
+        CKEDITOR.replace('question');
         CKEDITOR.config.autoParagraph = false;
         
     </script>
-    <script type="text/javascript">
+    <script>
     $(function() {
-    $('#qsn').ckeditor({
+
+      $('#Single').click(function () {
+        document.getElementById("options").disabled = true;
+        $('#options').val(1);
+        
+               
+              });
+
+              $('#Paragraph').click(function () {
+        document.getElementById("options").disabled = false;
+        
+        
+               
+              });
+
+    $('#question').ckeditor({
         toolbar: 'Full',
         enterMode : CKEDITOR.ENTER_BR,
         shiftEnterMode: CKEDITOR.ENTER_P
-    });
-});
+            });
+        });
     </script>
+
+
     <!-- offset area end -->
     <!-- jquery latest version -->
-    <script src="{{ asset('assets/js/vendor/jquery-2.2.4.min.js') }}"></script>
+   
     <!-- bootstrap 4 js -->
     <script src="{{ asset('assets/js/popper.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>

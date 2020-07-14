@@ -123,7 +123,6 @@
              <option value="Paragraph">Paragraph</option>
              <option value="Single">Single</option>
         </select>
-        
       </div>   
     </div>
   </div>
@@ -237,7 +236,8 @@ $(document).ready(function(){
 var id=$(this).data('id');
 alert(id);
 
- $.post('{{ URL::to("admin/home/managefillingblanks")}}',{id:id},function(data){
+$.post('{{ URL::to("admin/home/managefilling")}}',{id:id},function(data){
+    $('tr#'+id).remove();
   console.log(data);
 
      });
@@ -252,6 +252,8 @@ alert(id);
    
 
 </script>
+
+
    
 </body>
 

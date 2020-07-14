@@ -1,6 +1,12 @@
+
 (function($) {
 
 
+    
+      
+      $('#para').click(function () {
+       alert("ok");
+    });
     
 
 

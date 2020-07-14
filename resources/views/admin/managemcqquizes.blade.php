@@ -218,7 +218,7 @@
             });
 
      var id=$(this).data('id');
-     alert(id);
+     
 
       $.post('{{ URL::to("admin/home/managemcq")}}',{id:id},function(data){
        console.log(data);
