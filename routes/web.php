@@ -101,3 +101,9 @@ Route::POST('admin-password/reset/{token}','Admin\ForgotPasswordController@showR
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//////////modified By Chamil//////////////////////////
+
+
+Route::get('Admin/short_answer_model','ShortAnswerController@index');
+
