@@ -1,4 +1,4 @@
-<!doctype html>
+<!Doctype html>
 <html class="no-js" lang="en">
 
 <head>
@@ -130,7 +130,7 @@
 </div>
 
 
-    <table id="managemcq" class="table table-bordered">
+    <table id="managefillingblanks" class="table table-bordered">
         <thead class="table-head">
         <tr>
             <th style="display:none">id</th>
@@ -221,77 +221,37 @@
     <script src="{{ asset('assets/js/plugins.js') }}"></script>
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
     <script src="{{ asset('assets/js/index.js') }}"></script>
+    
     <script>
 
-     $(document).ready(function(){
+$(document).ready(function(){
 
-        $('body').delegate('#managemcq #del','click',function(e){
-            $.ajaxSetup({
+   $('body').delegate('#managefillingblanks #del','click',function(e){
+    $.ajaxSetup({
   headers: {
     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
   }
-});
 
-     var id=$(this).data('id');
-      $.post('{{ URL::to("admin/home/managemcq")}}',{id:id},function(data){
-       console.log(data);
+            });
 
-          });
+var id=$(this).data('id');
+alert(id);
 
-        });
+ $.post('{{ URL::to("admin/home/managefillingblanks")}}',{id:id},function(data){
+  console.log(data);
 
-        //update mcq
-        
-/*
-        $('body').delegate('#managemcq #edit','click',function(e){
+     });
 
-          
+   });
 
-            $.ajaxSetup({
-  headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  }
-});
+  
 
-     var id=$(this).data('id');
+   });
 
 
+   
 
-    //  $.ajax({
-    //             url: '{{ route("editmcqmodel") }}',
-    //             type: 'GET',
-    //             data: { id: id },
-                
-    //             success: function(response)
-    //             {
-                   //alert(data);
-                   // var url = '{{ route("editmcqmodel") }}';
-                  //url = url.replace(':id', id);
-          
-                  //window.location.assign(url);
-                }
-            // });
-
-
-/*
-     
-      $.get('{{ URL::to("admin/home/editmcqmodel")}}',{id:id},function(data){
-        var url = '{{ route("editmcqmodel", [":id"] ) }}';
-            url = url.replace(':id', id);
-          
-            window.location.assign(url);
-            console.log("succes");
-
-          }); 
-
-     */
-
-        });
-
-
-        
-    });
-    </script>
+</script>
    
 </body>
 

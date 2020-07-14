@@ -50,7 +50,7 @@
         alert("please select a paper first");
       }
 
-      alert(prop_type);
+      
      
     // var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
@@ -60,7 +60,7 @@
 $.ajax({
        
       type: "get",
-      url: "/fillboxfilter/" ,
+      url: "/fillbox/" ,
       headers: {
        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
    },

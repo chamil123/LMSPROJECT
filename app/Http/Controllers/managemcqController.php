@@ -153,6 +153,8 @@ class managemcqController extends Controller
 
     }
 
+    
+
     public function search(Request $request){
         if( $request->ajax() ){
             $output="";

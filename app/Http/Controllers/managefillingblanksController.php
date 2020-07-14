@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\quiz;
+use App\blankoptions;
+use App\fillingblank;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -118,8 +120,27 @@ class managefillingblanksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    
+  
+    public function destroy(Request $request)
     {
         //
+        if($request->ajax()){
+        $qsns = blankoptions::where('question_id', $request->id)->get();
+        foreach ($qsns as $qsn){
+            DB::table('blankoptions')->where('id', $qsn->id)->delete();
+        }
+        
+        
+        fillingblank::destroy($request->id);
+        return response(['message'=>'Record deleted Succesfully']);
+        }
+
     }
+       
+    
+
+    
+
+
 }
