@@ -26,6 +26,7 @@ Route::get('admin/home/quizes','QuizController@index');
 Route::get('admin/home/coursemodes','CourseModeController@index');
 
 Route::get('searchbox','searchController@search')->name('searchfilter');
+Route::get('fillbox','managefillingblanksController@search')->name('fillboxfilter');
 //Route::get('search','searchController@search');
 
 Route::resource('mcqoptions','mcqoptionsController');

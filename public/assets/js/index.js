@@ -49,16 +49,18 @@
       if(cat==''){
         alert("please select a paper first");
       }
+
+      alert(prop_type);
      
     // var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
    
 
- /*    
+ 
 $.ajax({
        
       type: "get",
-      url: "/searchbox/" ,
+      url: "/fillboxfilter/" ,
       headers: {
        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
    },
@@ -67,7 +69,8 @@ $.ajax({
       // url: "{{URL::to('search') }}",
        
        data: {
-           'search' : prop_type,
+           'papertypeval' : prop_type,
+           'qid' : cat,
        },
    
        success:function(data)
@@ -80,7 +83,7 @@ $.ajax({
        }
 
  }); 
- */
+
  
 });
 
