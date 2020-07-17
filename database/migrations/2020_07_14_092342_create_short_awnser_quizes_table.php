@@ -23,12 +23,12 @@ class CreateShortAwnserQuizesTable extends Migration
                 ->references('id')->on('quizes')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->unsignedBigInteger('paraid');
-            $table->index(["paraid"], 'fk_paragraph');
-            $table->foreign('paraid', 'fk_paragraph')
-                ->references('id')->on('paragraphs')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
+            // $table->unsignedBigInteger('paraid');
+            // $table->index(["paraid"], 'fk_paragraph');
+            // $table->foreign('paraid', 'fk_paragraph')
+            //     ->references('id')->on('paragraphs')
+            //     ->onDelete('cascade')
+            //     ->onUpdate('cascade');
             $table->timestamps();
 
         });

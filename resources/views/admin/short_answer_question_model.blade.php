@@ -103,14 +103,15 @@
 
                     </div>
                     <div class="col-md-6" style="margin-top: 50px">
-                        <!--<form class="form-horizontal title1" name="form" action="{{ route('fillingblanks.store') }}"  method="POST">-->
-
+                    <form class="form-horizontal title1" name="add_name" id="add_name">
+                    <div class="alert alert-danger print-error-msg" style="display:none"><ul></ul></div>
+                                            <div class="alert alert-success print-success-msg" style="display:none"><ul></ul></div>
 
                         @csrf
 
                         <!-- Text input-->
                         <div class="form-group">
-                            <label class="col-md-12 control-label" for="name">Quize Name</label>  
+                            <label class="col-md-12 control-label" for="name">Quize Name</label>
                             <div class="col-md-12">
                                 <select class="form-control papercatdropdown" name="quizid" >
                                     <option value=""></option>
@@ -128,46 +129,65 @@
                             </div>
                         </div>
 
-
-
-
-                        <!-- Text input-->
-                        <!--                            <div class="form-group">
-                                                        <label class="col-md-12 control-label" for="qsn">Question</label>  
-                                                        <div class="col-md-12">
-                                                            <textarea id="qsn" name="Question" placeholder="Question" class="form-control input-md"></textarea>
-                        
-                                                        </div>
-                                                    </div>-->
-
-                        <!-- Text input-->
                         <div class="form-group">
-                            <label class="col-md-12 control-label" for="right"></label>  
+                            <label class="col-md-12 control-label" for="right"></label>
                             <div class="col-md-12">
-                                <input id="right" name="marks" placeholder="Type Question here" class="form-control input-md" min="0" type="text">
+                                <input id="question" name="question" placeholder="Type Question here" class="form-control input-md" min="0" type="text">
 
                             </div>
                         </div>
 
-                        <div class="form-group"style="margin-top: -20px">
-                            <label class="col-md-12 control-label" for="wrong"></label>  
+
+
+                                <div class="container ">
+                                    <h5 align="left"> Add Answers</h5>
+                                    <div class="form-group" style="margin-top: -25px;">
+                                        <!-- <form   > -->
+                                        <!-- @csrf -->
+
+                                            
+                                            </br></br>
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover" id="dynamic_field" border="0">
+                                                        <tr>
+                                                        <td>
+                                                            <label style="padding-top:10px" for="">1</label>
+                                                            </td>
+                                                            <td><input type="text" name="shortanswer_value[]" placeholder="Enter answer" class="form-control name-list">
+                                                            </td>
+                                                            <!-- <td>
+                                                            <div class="radio" style="padding-top:10px"><label><input type="radio" name="optradio[]" ></label></div>
+                                                            </td> -->
+                                                            <td><button type="button" name="add" id="add" class="btn btn-success btn-sm">Add more </button></td>
+                                                        </tr>
+                                                    </table>
+                                                    <div class="form-group">
+                                                            <label class="col-md-12 control-label" for="right"></label>
+                                                            <!-- <div class="col-md-12"> -->
+                                                                <input id="correct" name="correct" placeholder="Type correct answer number" class="form-control input-md" min="0" type="text">
+
+                                                            <!-- </div> -->
+                                                        </div>
+                                                <input type="button" name="submit" id="submit" class="btn btn-info btn-sm" value="submit">
+                                                </div>
+                                            </div>
+                                        <!-- </form> -->
+                                    </div>
+                                </div>
+                                </div>
+
+
+
+<!-- </form> -->
+                        <!-- <div class="form-group"style="margin-top: -20px">
+                            <label class="col-md-12 control-label" for="wrong"></label>
                             <div class="col-md-12">
                                 <button type="button" class="btn btn-secondary btn-sm"  data-toggle="modal" data-target="#myModal">Secondary</button>
 
                             </div>
-                        </div>
+                        </div> -->
 
-
-
-
-                        <div class="modal fade" id="myModal" role="dialog">
-                            <div class="modal-dialog">
-
-                                <!-- Modal content-->
-                                <div class="modal-content">
-                                    <div class="modal-header">
-
-                                        <form method="post" id="dynamic_form">
+                        <!-- <form method="post" id="dynamic_form">
                                             <span id="result"></span>
                                             <table class="table table-bordered table-striped" id="user_table">
                                                 <thead>
@@ -182,8 +202,44 @@
                                                 </tbody>
                                                 <tfoot>
                                                     <tr>
-                                                        <td></td>
-                                                        <td></td>
+                                                        <td col span="2" align="right"></td>
+
+                                                        <td>
+                                                            @csrf
+                                                            <input type="submit" name="save" id="save" class="btn btn-info btn-sm" value="Save"/>
+                                                        </td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </form> -->
+
+
+
+
+                        <!-- <div class="modal fade" id="myModal" role="dialog">
+                            <div class="modal-dialog">
+
+
+                                <div class="modal-content">
+                                    <div class="modal-header">
+
+                                        <form method="put" id="dynamic_form">
+                                            <span id="result"></span>
+                                            <table class="table table-bordered table-striped" id="user_table">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 200px">Answer</th>
+                                                        <th style="width: 200px">Correct answer</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <td colspan="2" align="right"></td>
+
                                                         <td>
                                                             @csrf
                                                             <input type="submit" name="save" id="save" class="btn btn-info btn-sm" value="Save"/>
@@ -202,11 +258,11 @@
                                 </div>
 
                             </div>
-                        </div>
+                        </div> -->
 
 
 
-                        <!--</form>-->
+                        </form>
                     </div>
 
 
@@ -221,22 +277,26 @@
             <!-- footer area end-->
         </div>
         @section('js')
-        <script src="{{ asset('vendor\unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+        <!-- <script src="{{ asset('vendor\unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
         <script src="{{ asset('vendor\unisharp/laravel-ckeditor/adapters/jquery.js') }}"></script>
         <script>
 CKEDITOR.replace('qsn');
 CKEDITOR.config.autoParagraph = false;
 
-        </script>
+        </script> -->
+
         <script type="text/javascript">
-            $(function () {
-                $('#qsn').ckeditor({
-                    toolbar: 'Full',
-                    enterMode: CKEDITOR.ENTER_BR,
-                    shiftEnterMode: CKEDITOR.ENTER_P
-                });
-            });
-        </script>
+            // $(function () {
+
+                // $('#qsn').ckeditor({
+                //     toolbar: 'Full',
+                //     enterMode: CKEDITOR.ENTER_BR,
+                //     shiftEnterMode: CKEDITOR.ENTER_P
+                // });
+            // });
+
+
+      </script>
 
         <!-- page container area end -->
         <!-- offset area start -->
@@ -284,67 +344,12 @@ CKEDITOR.config.autoParagraph = false;
         <script src="{{ asset('assets/js/scripts.js') }}"></script>
         <script src="{{ asset('assets/js/index.js') }}"></script>
 
-        <script>
+        <script type="text/javascript">
 
 
 
-            $(doucment).ready(function () {
-                var count = 1;
-                dynamic_field(count);
-                function dynamic_field(number) {
-                    var html = '<tr>';
-                    html += '<td><input type="text" name="first_name[]" class="form-control"/></td>';
-                    html += '<td><input type="text" name="last_name[]" class="form-control"/></td>';
-                    if (number > 0) {
-                        html += '<td><button type="text" id="remove" name="remove" class="btn btn-danger">remove</button></td></tr>';
-                        $('tbody').append(html);
-                    } else {
-                        html += '<td><button type="text" id="add" name="add" class="btn btn-success">Add</button></td></tr>';
-                        $('tbody').html(html);
-                    }
-                }
-                $('#add').click(function () {
-                    count++;
-                    dynamic_field(count);
-                });
-                $(documment).on('click', '#remove', function () {
-                    count--;
-                    dynamic_field(count);
+</script>
 
-                });
-                $('#dynamic_form').on('submit', function () {
-                    event.preventDefault();
-                    $.ajax({
-                        url: '{{route("dynamic_field.insert")}}',
-                        method: 'post',
-                        data: $(this).serialize(),
-                        dataType: 'json',
-                        beforeSend: function () {
-                            $('#save').attr('disabled', 'disabled');
-                        },
-                        success: function (data) {
-                            if (data.error) {
-                                var error_html = '';
-                                for (var count = 0; count < data.error.length; count++) {
-                                    error_html += '<p>' + data.error[count] + '</p>';
-                                }
-                                $('#result').html('<div class="alert alert-danger">' + error_html + '</div>');
-                            } else {
-                                dynamic_field(1);
-                                 $('#result').html('<div class="alert alert-success">' + data.success + '</div>')
-                            }
-                            $('#save').attr('disabled',false);
-
-                        }
-
-                    }
-                    });
-                });
-
-         
-
-
-        </script>
 
     </body>
 

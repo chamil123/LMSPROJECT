@@ -106,4 +106,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::get('Admin/short_answer_model','ShortAnswerController@index');
+Route::post('/dynamic_field','ShortAnswerController@insert');
 
