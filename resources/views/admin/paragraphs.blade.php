@@ -1,4 +1,4 @@
-<!Doctype html>
+<!doctype html>
 <html class="no-js" lang="en">
 
 <head>
@@ -41,11 +41,9 @@
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Quiz
                                     </span></a>
                                 <ul class="collapse">
-                                    <li><a href="{{ url('admin/home/mcqquizes') }}">Add Mcq Quize</a></li>
+                                <li><a href="{{ url('admin/home/mcqquizes') }}">Add Mcq Quize</a></li>
                                     <li><a href="index3-horizontalmenu.html">Manage mcq quize</a></li>
-                                    <li><a href="{{ url('admin/home/fillingblanks') }}">Add Filling Blanks Quize</a></li>
-                                    <li><a href="{{ url('admin/home/managefillingblanks') }}">Manage Filling Blanks Quizes</a></li>
-                                    <li><a href="{{ url('admin/home/matchingquizes') }}">Add matching Quizes</a></li>
+                                    <li><a href="">Add Filling Blanks Quize</a></li>
                                 </ul>
                             </li>
                             <li><a href="invoice.html"><i class="ti-receipt"></i> <span>Instructors</span></a></li>
@@ -88,79 +86,51 @@
             </div>
             <!-- header area start -->
             <div class="row" id="top-of-site">
-            <div class="col-md-9"><p style="color:white;text-align:center;letter-spacing: 2.5px;">All Paper Questions for Blanks model</p></div>
+            <div class="col-md-9"><p style="color:white;text-align:center;letter-spacing: 2.5px;">Enter paragraphs</p></div>
             <div class="col-md-3">
            
             </div>
             </div>
-            
-        
+</br></br>
 
-        
-              
+ <div class="row">
 
+ <div class="col-md-3"></div>
+ <div class="col-md-6">  
+  <form method="post" action="{{ route('matchingoptions.store') }}">
+@csrf
+@php
+$z=1;
+$y=1;
+$x=0;
+@endphp
 
+<input type="hidden" class="form-control" name="questionid" value=" {{ $quizid }}">
+@foreach($orders as $order)
+<div class="">
+      <input type="hidden" class="form-control" name="id[]" value="{{ $order->hmid }}">
+      <input type="hidden" class="form-control" name="paragraphname[]" value="Paragraph{{$z}}">
 
-            
-<div class="details">
- 
-
+    <div class="form-group">
+      <label for="content[]" class=" text-md-right">Paragraph{{$z}}</label>
+       
+        <textarea id="question" name="content[]" class="form-control input-md"></textarea>
+    </div>
+</div>
+     @php
+$z++;
+$x++;
+@endphp
+@endforeach
 
 <div class="form-group">
-  <label class="control-label col-sm-4">Search with paper and question type</label>
-    <div class="col-sm-12">
-      <div class="row">
-        <div class="col-sm-5">
-        <select class="form-control" id="paper-drop" name="correctop" class="form-control">
-             <option value="">Select correct option</option>
-                @foreach($quizes as $quiz)
-                  <option value="{{ $quiz->id }}">{{ $quiz->quizname }}</option>
-                 @endforeach
-        </select>
-        </div>
-      <div class="col-sm-5">
-      <select class="form-control" id="pape-category" name="correctop" class="form-control">
-             <option value="">Select correct type</option>
-             <option value="Paragraph">Paragraph</option>
-             <option value="Single">Single</option>
-        </select>
-      </div>   
-    </div>
-  </div>
+<input type="text" placeholder="No of Matchingoptions" class="form-control" name="matchingoptions" >
 </div>
+ <button type="submit" class="btn btn-primary">Next</button>
 
-
-    <table id="managefillingblanks" class="table table-bordered">
-        <thead class="table-head">
-        <tr>
-            <th style="display:none">id</th>
-            <th>Question</th>
-            <th>Marks Allocate</th>
-            <th width="106px">options</th>
-            <th width="202px">Action</th>
-    
-        </tr>
-      </thead>
-        <tbody id="ajax-body">
- 
-       
-       
-        
-     </tbody>
-    </table>
-
-            </div>
-
+  </form>
+</div>
             
-            </div>
-
-        
-
-
-      
-    </div>
-  </div>
-</div>
             
         </div>
         <!-- main content area end -->
@@ -179,14 +149,19 @@
     <!-- offset area start -->
    
     @section('js')
+    <script src="{{ asset('assets/js/vendor/jquery-2.2.4.min.js') }}"></script>
     <script src="{{ asset('vendor\unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('vendor\unisharp/laravel-ckeditor/adapters/jquery.js') }}"></script>
+    
+    
     <script>
-        //CKEDITOR.replace('TextareaforLongdescription');
-        //CKEDITOR.replace('Longdescription');
+       // CKEDITOR.replace('question');
+        //CKEDITOR.config.autoParagraph = false;
+        
     </script>
     <!-- offset area end -->
     <!-- jquery latest version -->
-    <script src="{{ asset('assets/js/vendor/jquery-2.2.4.min.js') }}"></script>
+   
     <!-- bootstrap 4 js -->
     <script src="{{ asset('assets/js/popper.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
@@ -220,42 +195,6 @@
     <!-- others plugins -->
     <script src="{{ asset('assets/js/plugins.js') }}"></script>
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
-    <script src="{{ asset('assets/js/index.js') }}"></script>
-    
-    <script>
-
-$(document).ready(function(){
-
-   $('body').delegate('#managefillingblanks #del','click',function(e){
-    $.ajaxSetup({
-  headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  }
-
-            });
-
-var id=$(this).data('id');
-alert(id);
-
-$.post('{{ URL::to("admin/home/managefilling")}}',{id:id},function(data){
-    $('tr#'+id).remove();
-  console.log(data);
-
-     });
-
-   });
-
-  
-
-   });
-
-
-   
-
-</script>
-
-
-   
 </body>
 
 </html>
