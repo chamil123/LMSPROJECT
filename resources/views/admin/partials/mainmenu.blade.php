@@ -19,6 +19,7 @@
                                     <li><a href="{{ url('admin/home/fillingblanks') }}">Add Filling Blanks Quize</a></li>
                                     <li><a href="{{ url('admin/home/managefillingblanks') }}">Manage Filling Blanks Quizes</a></li>
                                     <li><a href="{{ url('admin/home/matchingquizes') }}">Add matching Quizes</a></li>
+                                    <li><a href="{{ url('Admin/short_answer_model') }}">Short answer Quizes</a></li>
                                 </ul>
                             </li>
                             <li><a href="invoice.html"><i class="ti-receipt"></i> <span>Instructors</span></a></li>

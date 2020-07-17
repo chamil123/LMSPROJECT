@@ -21,7 +21,8 @@
         <div class="sidebar-menu">
             <div class="sidebar-header">
                 <div class="logo">
-                    <a href="index.html"><img src="{{ asset('assets/images/icon/logo.png') }}" alt="logo"></a>
+                <h1 style="font-weight:bold;  color: white;"> LMS</h1>
+                    <!-- <a href="index.html"><img src="{{ asset('assets/images/icon/logo.png') }}" alt="logo"></a> -->
                 </div>
             </div>
             <div class="main-menu">
@@ -46,6 +47,8 @@
                                     <li><a href="{{ url('admin/home/fillingblanks') }}">Add Filling Blanks Quize</a></li>
                                     <li><a href="{{ url('admin/home/managefillingblanks') }}">Manage Filling Blanks Quizes</a></li>
                                     <li><a href="{{ url('admin/home/matchingquizes') }}">Add matching Quizes</a></li>
+
+                                    <li><a href="{{ url('Admin/short_answer_model') }}">Short answer Quizes</a></li>
                                 </ul>
                             </li>
                             <li><a href="invoice.html"><i class="ti-receipt"></i> <span>Instructors</span></a></li>
@@ -75,8 +78,8 @@
                     </div>
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
-                            <img class="avatar user-thumb" src="assets/images/author/avatar.png" alt="avatar">
-                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">Kumkum Rai <i class="fa fa-angle-down"></i></h4>
+                           <img class="avatar user-thumb" src="{{ asset('assets/images/author/149071.png')}}" alt="avatar">
+                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">Test User <i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="#">Message</a>
                                 <a class="dropdown-item" href="#">Settings</a>
