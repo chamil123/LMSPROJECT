@@ -41,6 +41,9 @@ Route::get('admin/home/coursetests','CoursetestController@index');
 Route::resource('managemcq','managemcqController');
 Route::get('admin/home/managemcq','managemcqController@index');
 
+
+Route::resource('headingoptions','headingoptionsController');
+
 Route::resource('exams','examController');
 Route::get('admin/home/exams','examController@index');
 
@@ -48,10 +51,18 @@ Route::post('admin/home/managefilling','managefillingblanksController@destroy');
 Route::resource('managefillingblanks','managefillingblanksController');
 Route::get('admin/home/managefillingblanks','managefillingblanksController@index');
 
+Route::resource('matchingoptions','matchoptionsController');
 
 
 Route::resource('mcqquizes','mcqquizeController');
 Route::get('admin/home/mcqquizes','mcqquizeController@index');
+
+
+Route::resource('matchingquestions','MatchingquestionsController');
+
+
+Route::resource('matchingquizes','headingmatchController');
+Route::get('admin/home/matchingquizes','headingmatchController@index');
 
 Route::resource('fillingblanks','FillingBlanksController');
 Route::get('admin/home/fillingblanks','FillingBlanksController@index');

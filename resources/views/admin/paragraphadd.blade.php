@@ -1,4 +1,4 @@
-<!Doctype html>
+<!doctype html>
 <html class="no-js" lang="en">
 
 <head>
@@ -76,7 +76,7 @@
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
                             <img class="avatar user-thumb" src="assets/images/author/avatar.png" alt="avatar">
-                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">Kumkum Rai <i class="fa fa-angle-down"></i></h4>
+                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">User <i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="#">Message</a>
                                 <a class="dropdown-item" href="#">Settings</a>
@@ -88,79 +88,40 @@
             </div>
             <!-- header area start -->
             <div class="row" id="top-of-site">
-            <div class="col-md-9"><p style="color:white;text-align:center;letter-spacing: 2.5px;">All Paper Questions for Blanks model</p></div>
+            <div class="col-md-9"><p style="color:white;text-align:center;letter-spacing: 2.5px;">Enter Options</p></div>
             <div class="col-md-3">
            
             </div>
             </div>
-            
-        
+</br></br>
 
-        
-              
+ <div class="row">
 
-
-
-            
-<div class="details">
- 
-
+ <div class="col-md-3"></div>
+ <div class="col-md-6">  
+  <form method="post" action="{{ route('matchingquizes.store') }}">
+  @csrf
 
 <div class="form-group">
-  <label class="control-label col-sm-4">Search with paper and question type</label>
-    <div class="col-sm-12">
-      <div class="row">
-        <div class="col-sm-5">
-        <select class="form-control" id="paper-drop" name="correctop" class="form-control">
-             <option value="">Select correct option</option>
-                @foreach($quizes as $quiz)
-                  <option value="{{ $quiz->id }}">{{ $quiz->quizname }}</option>
-                 @endforeach
-        </select>
-        </div>
-      <div class="col-sm-5">
-      <select class="form-control" id="pape-category" name="correctop" class="form-control">
-             <option value="">Select correct type</option>
-             <option value="Paragraph">Paragraph</option>
-             <option value="Single">Single</option>
-        </select>
-      </div>   
-    </div>
-  </div>
+<label>Course</label>
+                           <select class="form-control coursedropdown" name="quizid" class="form-control">
+                           <option value="">Select correct option</option>
+                                   @foreach($quizes as $quiz)
+                                       <option value="{{ $quiz->id }}">{{$quiz->quizname}}</option>
+                                       
+                                     @endforeach
+                    </select>
 </div>
+<div class="form-group">
+        <input type="text" name="paragraphs" class="form-control" id="exampleFormControlInput1" placeholder="Enter no of Paragraphs" value="">
+    </div>
 
 
-    <table id="managefillingblanks" class="table table-bordered">
-        <thead class="table-head">
-        <tr>
-            <th style="display:none">id</th>
-            <th>Question</th>
-            <th>Marks Allocate</th>
-            <th width="106px">options</th>
-            <th width="202px">Action</th>
-    
-        </tr>
-      </thead>
-        <tbody id="ajax-body">
- 
-       
-       
-        
-     </tbody>
-    </table>
+ <button type="submit" class="btn btn-primary">Add the question</button>
 
-            </div>
-
+  </form>
+</div>
             
-            </div>
-
-        
-
-
-      
-    </div>
-  </div>
-</div>
             
         </div>
         <!-- main content area end -->
@@ -220,42 +181,6 @@
     <!-- others plugins -->
     <script src="{{ asset('assets/js/plugins.js') }}"></script>
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
-    <script src="{{ asset('assets/js/index.js') }}"></script>
-    
-    <script>
-
-$(document).ready(function(){
-
-   $('body').delegate('#managefillingblanks #del','click',function(e){
-    $.ajaxSetup({
-  headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  }
-
-            });
-
-var id=$(this).data('id');
-alert(id);
-
-$.post('{{ URL::to("admin/home/managefilling")}}',{id:id},function(data){
-    $('tr#'+id).remove();
-  console.log(data);
-
-     });
-
-   });
-
-  
-
-   });
-
-
-   
-
-</script>
-
-
-   
 </body>
 
 </html>
